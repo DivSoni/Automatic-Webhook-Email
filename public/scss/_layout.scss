@@ -1,0 +1,11 @@
+.wrapper {
+  margin: 0 auto;
+  position: relative;
+  width: 940px;
+}
+
+.wrapper.content {
+  background: $white;
+  overflow: hidden;
+  padding: 0 20px 20px;
+}

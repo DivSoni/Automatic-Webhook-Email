@@ -1,0 +1,26 @@
+doctype html
+html(lang="en")
+  head
+    title Automatic Webhook Email Example App
+    meta(http-equiv="content-type" content="text/html; charset=utf-8")
+    meta(http-equiv="X-UA-Compatible" content="chrome=1")
+    meta(name="viewport" content="width=device-width, initial-scale=1")
+    meta(name="description" content="Get an email when your check engine light comes on.")
+    link(rel="stylesheet" type="text/css" href="/css/style.css" media="screen")
+  body.signin-body
+  
+    .return-link Go to 
+      a.link-blue(href="http://automatic.com") automatic.com
+      
+    .signin-header
+      a.automatic-logo(href="http://automatic.com")
+      .email-title 
+        .plus +
+        span Email
+    
+    .panel.signin-panel
+      .panel-body
+        block content
+          
+    block scripts
+        
