@@ -14,12 +14,7 @@
   "bugs": {
     "url": "http://github.com/automatic/Automatic-Webhook-Email/issues"
   },
-  "licenses": [
-    {
-      "type": "MIT",
-      "url": "http://www.opensource.org/licenses/MIT"
-    }
-  ],
+  "license": "Apache-2.0",
   "dependencies": {
     "body-parser": "~1.12.3",
     "bootstrap-sass": "~3.3.4",

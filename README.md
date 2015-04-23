@@ -93,3 +93,8 @@ The app is can be deployed on Heroku with MongoLab, RedisCloud and SendGrid addo
 ### Environment Variables
 
 Add all the items in config-sample.json as heroku environment variables as well as a `NODE_ENV` variable set to `production`.
+
+
+## License
+
+This project is licensed under the terms of the Apache 2.0 license.
