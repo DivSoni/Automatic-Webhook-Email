@@ -1,10 +1,20 @@
 # Automatic Webhook Email Example App
 
-This is a node.js app that listens to Automatic](http://automatic.com) webhooks and sends an email when a users "Check Engine" light comes on with the MIL code and description.
+This is a node.js app that listens to [Automatic](http://automatic.com) webhooks and sends an email when a users "Check Engine" light comes on with the MIL code and description.
 
 This app demonstrates the use of the [Automatic Webhook API](http://developer.automatic.com).
 
-## Installation
+
+## One-Click deploy to Heroku
+
+Click this button to instantly deploy this app to Heroku. You'll need an [Automatic client ID and secret](http://developer.automatic.com).
+
+[![Deploy](https://www.herokucdn.com/deploy/button.png)](https://heroku.com/deploy)
+
+After deploying, you will need to use the Automatic [Developer Apps Manager](https://developer.automatic.com/my-apps/) to set your application's redirect URL and webhook URL to match the Heroku app name you selected when deploying. For instance, if you name your app `email-test` in Heroku your redirect URL should be `https://email-test.herokuapp.com/redirect` and your webhook URL should be `https://email-test.herokuapp.com/webhook`. Note that the URLs must start with `https`.
+
+
+## Running Locally
 
 ### Install node and gulp
 
