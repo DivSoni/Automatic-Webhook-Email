@@ -92,10 +92,6 @@ gulp.task('fonts:copy', function() {
 });
 
 
-gulp.task('css:copy', function() {
-});
-
-
 gulp.task('develop', function() {
   var server = plugins.liveServer.new('bin/www');
   server.start();
@@ -115,7 +111,9 @@ gulp.task('develop', function() {
     'public/css/**/*.css',
     'public/images/**/*',
     'views/**/*.jade'
-  ], server.notify);
+  ], function() {
+    server.notify.apply(server);
+  });
 
   //watch for back-end js changes
   gulp.watch([
@@ -128,7 +126,6 @@ gulp.task('develop', function() {
 
 gulp.task('build', [
   'fonts:copy',
-  'css:copy',
   'css:minify',
   'js:compress'
 ]);
