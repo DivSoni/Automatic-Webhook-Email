@@ -1,14 +1,14 @@
-var monk = require('monk');
-var db = monk(process.env.MONGOLAB_URI || 'mongodb://127.0.0.1:27017/automatic-webhook-email');
-var users = db.get('users');
+const monk = require('monk');
+const db = monk(process.env.MONGOLAB_URI || 'mongodb://127.0.0.1:27017/automatic-webhook-email');
+const users = db.get('users');
 
 
-exports.getUser = function(automatic_id, cb) {
-  users.findOne({automatic_id: automatic_id}, cb);
+exports.getUser = (automaticId, cb) => {
+  users.findOne({automatic_id: automaticId}, cb);
 };
 
 
-exports.saveUser = function(user, cb) {
+exports.saveUser = (user, cb) => {
   users.findAndModify(
     {automatic_id: user.automatic_id},
     {$set: user},
@@ -18,6 +18,6 @@ exports.saveUser = function(user, cb) {
 };
 
 
-exports.destroyUser = function(automatic_id, cb) {
-  users.remove({automatic_id: automatic_id}, cb);
+exports.destroyUser = (automaticId, cb) => {
+  users.remove({automatic_id: automaticId}, cb);
 };

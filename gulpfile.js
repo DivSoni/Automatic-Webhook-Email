@@ -1,15 +1,13 @@
-var gulp = require('gulp');
-var source = require('vinyl-source-stream');
-var watchify = require('watchify');
-var babelify = require('babelify');
-var browserify = require('browserify');
-var reactify = require('reactify');
-var plugins = require("gulp-load-plugins")();
+const gulp = require('gulp');
+const source = require('vinyl-source-stream');
+const watchify = require('watchify');
+const babelify = require('babelify');
+const browserify = require('browserify');
+const plugins = require('gulp-load-plugins')();
 
 
-var bundler = watchify(browserify('./public/javascripts/index.js', watchify.args)
-  .transform(babelify)
-  .transform(reactify));
+const bundler = watchify(browserify('./public/javascripts/index.js', watchify.args)
+  .transform(babelify));
 bundler.on('update', bundle);
 bundler.on('log', plugins.util.log);
 
@@ -27,22 +25,15 @@ function bundle() {
 }
 
 
-gulp.task('jshint', function() {
-  return gulp.src('./public/javascripts/**/*.js')
-    .pipe(plugins.jshint())
-    .pipe(plugins.jshint.reporter('default'));
-});
-
-
-gulp.task('scss:lint', function() {
+gulp.task('scss:lint', () => {
   gulp.src('./public/scss/**/*.scss')
     .pipe(plugins.scssLint());
 });
 
 
-gulp.task('scss:compileDev', function() {
+gulp.task('scss:compileDev', () => {
   gulp.src('./public/scss/**/*.scss')
-    //build sourcemaps
+    // Build sourcemaps
     .pipe(plugins.sourcemaps.init())
     .pipe(plugins.sass({errLogToConsole: true}))
     .pipe(plugins.sourcemaps.write())
@@ -50,36 +41,35 @@ gulp.task('scss:compileDev', function() {
 });
 
 
-gulp.task('scss:compile', ['fonts:copy'], function() {
+gulp.task('scss:compile', ['fonts:copy'], () => {
   gulp.src('./public/scss/**/*.scss')
     .pipe(plugins.sass({errLogToConsole: true}))
     .pipe(gulp.dest('./public/css'));
 });
 
 
-gulp.task('css:minify', ['scss:compile'], function() {
+gulp.task('css:minify', ['scss:compile'], () => {
   gulp.src('./public/css/*.css')
-    .pipe(plugins.minifyCss())
+    .pipe(plugins.cleanCss())
     .pipe(gulp.dest('./public/css'));
 });
 
 
-gulp.task('js:develop', ['jshint'], function() {
+gulp.task('js:develop', () => {
   bundle();
 });
 
 
-gulp.task('js:compress', ['js:browserify'], function() {
+gulp.task('js:compress', ['js:browserify'], () => {
   gulp.src('./public/dest/index.js')
     .pipe(plugins.uglify())
     .pipe(gulp.dest('./public/dest'));
 });
 
 
-gulp.task('js:browserify', function() {
-  var b = browserify('./public/javascripts/index.js')
-    .transform(babelify)
-    .transform(reactify);
+gulp.task('js:browserify', () => {
+  const b = browserify('./public/javascripts/index.js')
+    .transform(babelify);
 
   b.bundle()
     .pipe(source('index.js'))
@@ -90,20 +80,20 @@ gulp.task('js:browserify', function() {
 gulp.task('scss:develop', ['scss:lint', 'scss:compileDev']);
 
 
-gulp.task('fonts:copy', function() {
+gulp.task('fonts:copy', () => {
   gulp.src(['./node_modules/bootstrap-sass/assets/fonts/bootstrap/*', './node_modules/font-awesome/fonts/*'])
     .pipe(gulp.dest('./public/dest/fonts'));
 });
 
 
-gulp.task('develop', function() {
+gulp.task('develop', () => {
   plugins.livereload.listen();
 
   require('nodemon')({
     script: 'bin/www',
     stdout: true
-  }).on('readable', function() {
-    this.stdout.on('data', function(chunk) {
+  }).on('readable', () => {
+    this.stdout.on('data', (chunk) => {
       if (/^listening/.test(chunk)) {
         plugins.livereload.reload();
       }

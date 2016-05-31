@@ -15,7 +15,7 @@ block content
       .signin-description Sign in to your Automatic account.
   #alert.alert
   .row.border-both(class=automatic ? 'completed' : '')
-    .signin-instructions 
+    .signin-instructions
       .signin-text Authorize your Automatic account
     a.signin-btn(href="/authorize/") Authorize
 
@@ -33,13 +33,12 @@ block scripts
 
       return params;
     };
-    
+
     var query = getQueryParams(document.location.search);
-    
-    if(query.alert) {
+
+    if (query.alert) {
       var alert = document.getElementById('alert');
       alert.textContent = query.alert;
       alert.classList.add('show');
       alert.classList.add('alert-danger');
     }
-        
